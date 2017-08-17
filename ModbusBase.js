@@ -52,21 +52,21 @@ ModbusBase.prototype.ReadWQ = function(mapItem){
 };
 ModbusBase.prototype.WriteBQ = function(mapItem,value){
     this.mbClient.setID(this.devId);
-    var reg_addr = mapItem.start;
-    var reg_quantity = (mapItem.end - mapItem.start + 1);
+    let reg_addr = mapItem.start;
+    let reg_quantity = (mapItem.end - mapItem.start + 1);
 
-    var buf = new Array(reg_quantity);
-    for (var i = 0; i < reg_quantity; i++) {
-        buf[i] = (value[mapItem.start + i] ? true : false);
+    let buf = new Array(reg_quantity);
+    for (let i = 0; i < reg_quantity; i++) {
+        buf[i] = (!!value[mapItem.start + i] );
     }
     return this.mbClient.writeCoils(mapItem.start, buf);
 };
 
 ModbusBase.prototype.WriteWQ = function(mapItem,value){
 
-    var reg_quantity = (mapItem.end - mapItem.start + 1);
-    var buf = new Array(reg_quantity);
-    for (var i = 0; i < reg_quantity; i++) {
+    let reg_quantity = (mapItem.end - mapItem.start + 1);
+    let buf = new Array(reg_quantity);
+    for (let i = 0; i < reg_quantity; i++) {
         buf[i] = value[mapItem.start + i];
     }
 
